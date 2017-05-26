@@ -1,0 +1,76 @@
+<ion-header>
+  <ion-navbar color="danger">
+    <ion-title>Add a Place</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <ion-list inset>
+      <ion-item>
+        <ion-label floating>Title</ion-label>
+        <ion-input type="text" formControlName="title"></ion-input>
+      </ion-item>
+      <p class="error" *ngIf="formErrorHandler('title')">Title is required!</p>
+
+      <ion-item>
+        <ion-label floating>Short Description</ion-label>
+        <ion-textarea formControlName="description"></ion-textarea>
+      </ion-item>
+      <p class="error" *ngIf="formErrorHandler('description')">Description is required!</p>
+
+      <!-- Prevent from the last ion-item to be :last-child -->
+      <ion-item style="display: none;"></ion-item>
+    </ion-list>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col col-6>
+          <button type="button" ion-button block outline icon-left (click)="onLocate()">
+            <ion-icon name="locate"></ion-icon>
+            Locate me
+          </button>
+        </ion-col>
+        <ion-col col-6>
+          <button type="button" ion-button block outline icon-left (click)="onOpenMap()">
+            <ion-icon name="map"></ion-icon>
+            Select on Map
+          </button>
+        </ion-col>
+
+        <ion-col col-12 *ngIf="!locationIsSet && displayAlerts">
+          <p class="alert">Please selct location</p>
+        </ion-col>
+
+        <ion-col col-12 *ngIf="locationIsSet">
+          <sebm-google-map [latitude]="location.lat" [longitude]="location.lng" [zoom]="16" [mapDraggable]="false" [streetViewControl]="false" [disableDoubleClickZoom]="true" [zoomControl]="false">
+            <sebm-google-map-marker [latitude]="location.lat" [longitude]="location.lng"></sebm-google-map-marker>
+          </sebm-google-map>
+        </ion-col>
+
+        <ion-col col-12>
+          <button type="button" ion-button block outline icon-left (click)="onTakePhoto()">
+            <ion-icon name="camera"></ion-icon>
+            Take a Photo
+          </button>
+        </ion-col>
+
+        <ion-col col-12 *ngIf="!imagePath && displayAlerts">
+          <p class="alert">Please add photo</p>
+        </ion-col>
+
+        <ion-col col-12 *ngIf="imgPath">
+          <img [src]="imgPath">
+        </ion-col>
+
+        <ion-col col-6>
+          <button type="submit" ion-button block [disabled]="form.invalid">Add Place</button>
+        </ion-col>
+        <ion-col col-6>
+          <button type="button" ion-button color="danger" block navPop>Go Back</button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>

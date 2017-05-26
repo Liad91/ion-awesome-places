@@ -1,0 +1,18 @@
+page-add-place {
+  .error {
+    color: color($colors, danger);
+    margin: 5px 0 0;
+    font-size: 90%;
+  }
+
+  .alert {
+    margin: 0 -9999px;
+    text-align: center;
+    padding: 5px 0;
+    background: #FFFF8D;
+    color: #daac00;
+    border: 1px solid #e8e800;
+    border-radius: 5px;
+    font-size: 90%;
+  }
+}

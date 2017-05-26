@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-navbar color="danger">
+    <ion-title>Awesome Places</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-grid>
+    <ion-row *ngIf="places.length > 0">
+      <ion-col col-12 *ngFor="let place of places; let i = index">
+        <ion-card tapable (click)="onSelectPlace(place, i)">
+          <img [src]="place.imgPath">
+          <ion-card-content text-center>
+            <ion-card-title>{{ place.title }}</ion-card-title>
+            <ion-card-content>{{ place.description }}</ion-card-content>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-fab bottom right>
+    <button ion-fab color="danger" navPush="AddPlacePage"><ion-icon name="add"></ion-icon></button>
+  </ion-fab>
+</ion-content>

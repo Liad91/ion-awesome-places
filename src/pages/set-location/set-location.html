@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-navbar color="danger">
+    <ion-title>Select Location</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col col-12>
+        <sebm-google-map [latitude]="location.lat" [longitude]="location.lng" [zoom]="16" (mapClick)="onSetMarket($event)">
+          <sebm-google-map-marker [latitude]="marker.lat" [longitude]="marker.lng" *ngIf="marker"></sebm-google-map-marker>
+        </sebm-google-map>
+      </ion-col>
+
+      <ion-col col-6>
+        <button ion-button block (click)="onConfirm()" [disabled]="!marker">Confirm</button>
+      </ion-col>
+      <ion-col col-6>
+        <button ion-button color="danger" block (click)="onCancel()">Cancel</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
